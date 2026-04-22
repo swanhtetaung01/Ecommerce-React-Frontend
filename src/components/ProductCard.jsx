@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
+import ProductViewModal from "./ProductViewModal";
 
 const ProductCard = ({
-    productId,
+    id: productId,
     productName,
     image,
     description,
@@ -25,8 +26,8 @@ const ProductCard = ({
     return (
         <div className="border rounded-lg shadow-xl overflow-hidden transition-shadow duration-300">
             <div 
-            onClick={() => {handleProductView(
-                    productId,
+            onClick={() => {handleProductView({
+                    id: productId,
                     productName,
                     image,
                     description,
@@ -34,7 +35,7 @@ const ProductCard = ({
                     price,
                     discount,
                     specialPrice
-                )}} 
+            })}} 
             className="w-full overflow-hidden aspect-3/2">    
                 <img 
                 className="w-full h-hull cursor-pointer transition-transform duration-300 transform hover:scale-105"
@@ -43,8 +44,8 @@ const ProductCard = ({
                 </img>
             </div>
             <div className="p-4">
-                <h2 onClick={() => {handleProductView(
-                    productId,
+                <h2 onClick={() => {handleProductView({
+                    id: productId,
                     productName,
                     image,
                     description,
@@ -52,7 +53,7 @@ const ProductCard = ({
                     price,
                     discount,
                     specialPrice
-                )}}
+                })}}
                     className="text-lg font-semibold mb-2 cursor-pointer">
                     {productName}
                 </h2>
@@ -78,6 +79,11 @@ const ProductCard = ({
                     </button>
                 </div>
             </div>
+            <ProductViewModal 
+            isOpen={openProductViewModl} 
+            setIsOpen={setOpenProductViewModal}
+            product={selectedViewProduct}
+            isAvailable={isAvailable}/>
         </div>
     )
 }
